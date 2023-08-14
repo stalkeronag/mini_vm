@@ -17,6 +17,11 @@ public class RunOnlyStrategy : ExecuteCommandsStrategy
         countCommandExecute = countCommand;
     }
 
+    public override void AddObserver(IObserverCommand observerCommand)
+    {
+        throw new NotImplementedException();
+    }
+
     public override void Execute()
     {
        ICommand[] commands = Commands.ToArray();
@@ -25,5 +30,10 @@ public class RunOnlyStrategy : ExecuteCommandsStrategy
        {
         commands[i].Execute();
        } 
+    }
+
+    public override void RemoveObserver(IObserverCommand observerCommand)
+    {
+        throw new NotImplementedException();
     }
 }

@@ -1,7 +1,7 @@
 
 namespace Executor.Interfaces;
 
-public abstract class ExecuteCommandsStrategy
+public abstract class ExecuteCommandsStrategy : IObservableCommand
 {
     private List<ICommand> commands;
 
@@ -13,4 +13,9 @@ public abstract class ExecuteCommandsStrategy
     }
 
     public abstract void Execute();
+
+    public abstract void AddObserver(IObserverCommand observerCommand);
+   
+
+    public abstract void RemoveObserver(IObserverCommand observerCommand);
 }

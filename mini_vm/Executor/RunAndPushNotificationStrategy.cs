@@ -4,7 +4,7 @@ using Executor.Interfaces;
 
 namespace Executor;
 
-public class RunAndPushNotificationStrategy : ExecuteCommandsStrategy, IObservableCommand
+public class RunAndPushNotificationStrategy : ExecuteCommandsStrategy
 {
     private List<IObserverCommand> observers;
 
@@ -13,12 +13,12 @@ public class RunAndPushNotificationStrategy : ExecuteCommandsStrategy, IObservab
 
     }
 
-    public void AddObserver(IObserverCommand observerCommand)
+    public override void AddObserver(IObserverCommand observerCommand)
     {
         observers.Add(observerCommand);
     }
 
-    public void RemoveObserver(IObserverCommand observerCommand)
+    public override void RemoveObserver(IObserverCommand observerCommand)
     {
         observers.Remove(observerCommand);
     }
@@ -39,5 +39,5 @@ public class RunAndPushNotificationStrategy : ExecuteCommandsStrategy, IObservab
             observer.CommandCompleted(command);
         }
     }
- 
+
 }
