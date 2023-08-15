@@ -1,5 +1,6 @@
 
 
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using Debuger;
 using Executor;
@@ -31,7 +32,7 @@ public class FacadeProgram
 
     }
 
-    public void ExecuteProgramWithoutViewStateVm(string path)
+    public void ExecuteProgramWithResultViewEndStateVm(string path)
     {
         List<ICommand> commands = builderProgram.BuildProgram(path, builderCommand);
         ExecuteCommandsStrategy executeCommandsStrategy = new RunOnlyStrategy(commands);
@@ -39,11 +40,17 @@ public class FacadeProgram
         displayable.Display();
     }
 
-    public void ExecuteProgramWithViewStateVm(string path)
+    public void ExecuteProgramWithViewEachStateVm(string path)
     {
         List<ICommand> commands = builderProgram.BuildProgram(path, builderCommand);
         
         ExecuteCommandsStrategy executeCommandsStrategy = new RunAndPushNotificationStrategy(commands);
+
+        if (observers.Count ==0)
+        {
+            IObserverCommand observerCommand = new CommandsObserver(displayable);
+            observers.Add(observerCommand);
+        }
         
         foreach (var observer in observers)
         {

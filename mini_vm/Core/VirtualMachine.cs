@@ -18,8 +18,8 @@ public class VirtualMachine
     public byte[] Ports { get => ports; set => ports = value; }
     public byte[] RegisterFlags { get => registerFlags; set => registerFlags = value; }
     public int CountBytesRam { get => countBytesRam; set => countBytesRam = value; }
+    public byte[][] Registers { get => registers; set => registers = value; }
 
-    
     public const int countPorts = 256;
 
     public const int sizeInBytesValueCell = 1;
@@ -52,6 +52,8 @@ public class VirtualMachine
 
     private byte[] ports;
 
+    private byte[][] registers;
+
     private VirtualMachine()
     {
         Ram = new byte[CountBytesRam];
@@ -66,6 +68,16 @@ public class VirtualMachine
         registerFlags = new byte[sizeInBytesValueCell];
         registerSP = new byte[sizeInBytesAddressCell];
         registerPC = new byte[sizeInBytesAddressCell];
+        Registers = new byte[][]
+        {
+            registerA,
+            registerB,
+            registerC,
+            registerD,
+            registerE,
+            registerH,
+            registerL
+        };
     }
 
     public static VirtualMachine GetInstance()
